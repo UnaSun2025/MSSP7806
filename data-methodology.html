@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data & Methodology | Pennsylvania Business Environment Navigator</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Data & Methodology</h1>
+      <p>Reference documentation for variables, formulas, scenario parameters, and limitations used in this planning tool.</p>
+      <p><a href="./index.html" style="color:#d8fff2;">Back to Homepage</a></p>
+    </section>
+
+    <section class="panel" style="margin-top:14px;">
+      <h2>Data Dictionary</h2>
+      <p class="muted">Table lists key variables used in analysis outputs. Last-updated reflects model ingestion date or source reference date where available.</p>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Variable Name</th>
+            <th>Definition</th>
+            <th>Unit</th>
+            <th>Source</th>
+            <th>Last Updated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>enterprisesPA</td><td>Estimated number of establishments in Pennsylvania for selected industry.</td><td>count</td><td>[C6]</td><td>2023 release (model ingest 2026-03-01)</td></tr>
+          <tr><td>growth5yPct</td><td>Directional growth signal over prior five-year period based on establishments.</td><td>percent</td><td>[C6]</td><td>2019-2023 window</td></tr>
+          <tr><td>marketConcentrationTop5CountySharePct</td><td>Share of establishments concentrated in top 5 counties (proxy).</td><td>percent</td><td>[C6]</td><td>2023</td></tr>
+          <tr><td>cnitRate</td><td>Pennsylvania corporate net income tax rate used in scenario modeling.</td><td>rate</td><td>[C1]</td><td>Model reference 2026</td></tr>
+          <tr><td>payrollTaxRate</td><td>Proxy payroll-related tax rate used in model.</td><td>rate</td><td>Model parameter</td><td>2026-03-01</td></tr>
+          <tr><td>propertyTaxRate</td><td>Proxy effective property tax rate used for planning estimates.</td><td>rate</td><td>Model parameter</td><td>2026-03-01</td></tr>
+          <tr><td>electricityCents.industrial/commercial</td><td>State electricity benchmark rates used in energy cost estimates.</td><td>cents per kWh</td><td>[C7]</td><td>2024 reference</td></tr>
+          <tr><td>margin</td><td>Representative industry operating margin benchmark.</td><td>rate</td><td>[C8]</td><td>2026-01 benchmark file</td></tr>
+          <tr><td>revenuePerEmployee</td><td>Industry productivity proxy converting labor to revenue base.</td><td>USD per employee</td><td>Model parameter</td><td>2026-03-01</td></tr>
+          <tr><td>revenuePerCapacityUnit</td><td>Industry capacity-to-revenue conversion proxy.</td><td>USD per capacity unit</td><td>Model parameter</td><td>2026-03-01</td></tr>
+          <tr><td>energyIntensityKwhPerEmployee</td><td>Estimated annual energy intensity tied to workforce scale.</td><td>kWh per employee</td><td>Model parameter</td><td>2026-03-01</td></tr>
+          <tr><td>energyIntensityKwhPerCapacity</td><td>Estimated annual energy intensity tied to production capacity.</td><td>kWh per capacity unit</td><td>Model parameter</td><td>2026-03-01</td></tr>
+          <tr><td>depApprovalMeanMonths</td><td>Reference average duration signal for DEP-related reviews (proxy).</td><td>months</td><td>[C4] + model calibration</td><td>2026-03-01</td></tr>
+          <tr><td>communityOppositionRiskScore</td><td>Indicative local opposition risk score used for screening.</td><td>score (0-10)</td><td>Model parameter</td><td>2026-03-01</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel" style="margin-top:14px;">
+      <h2>Methodology</h2>
+      <h3>Core Formulas</h3>
+      <ul>
+        <li>Revenue Base = Investment * capTurnover * 0.45 + Employees * revenuePerEmployee * 0.35 + Capacity * revenuePerCapacityUnit * 0.20</li>
+        <li>Operating Profit = Revenue * margin</li>
+        <li>Tax Burden = Corporate Tax + Payroll Tax + Property Tax (proxy)</li>
+        <li>Net Profit = Operating Profit - Tax Burden - Energy Cost</li>
+        <li>Labor Cost Share = Annual Payroll / Revenue</li>
+      </ul>
+      <h3>Scenario Parameters (Base)</h3>
+      <ul>
+        <li>Revenue growth: 4.0% annually</li>
+        <li>Payroll growth: 3.0% annually</li>
+        <li>Tax and energy escalation: 2.5% annually</li>
+        <li>Electricity rate basis: PA state benchmark by use class ([C7])</li>
+      </ul>
+      <h3>Included in Model</h3>
+      <ul>
+        <li>Five-year directional revenue/profit/tax/energy scenario outputs</li>
+        <li>County context overlays and indicative policy screening</li>
+        <li>Rule-based permitting wizard and checklist outputs</li>
+      </ul>
+      <h3>Excluded from Model</h3>
+      <ul>
+        <li>Financing structure and debt service schedules</li>
+        <li>Depreciation schedules, bonus depreciation, and firm-specific tax elections</li>
+        <li>Detailed grant award probabilities or binding incentive determinations</li>
+        <li>Municipality-specific fee schedules and legal adjudication outcomes</li>
+      </ul>
+    </section>
+
+    <section class="panel" style="margin-top:14px;">
+      <h2>Disclaimers</h2>
+      <p>This tool provides planning estimates only. Outputs are directional and are not legal, tax, accounting, engineering, underwriting, or investment advice.</p>
+      <p>All policy and permitting content should be treated as typical/varies screening guidance. Final eligibility and approval outcomes depend on formal submissions, program cycles, site specifics, and agency determinations.</p>
+      <p>Typical requirements vary by municipality; verify with local officials.</p>
+    </section>
+
+    <section class="panel" style="margin-top:14px;">
+      <h2>Citation Placeholders</h2>
+      <ul class="cite-list">
+        <li>[C1] PA Department of Revenue - Corporate Net Income Tax: https://www.pa.gov/agencies/revenue/resources/tax-types-and-information/corporation-taxes/corporate-net-income-tax</li>
+        <li>[C2] PA Business One-Stop Registration: https://business.pa.gov/register/registering-with-pennsylvania/</li>
+        <li>[C3] PA Department of State - Business: https://www.pa.gov/agencies/dos/programs/business.html</li>
+        <li>[C4] PA DEP Business Permits: https://www.pa.gov/agencies/dep/programs-and-services/business.html</li>
+        <li>[C5] PA UCC / Building Permit Framework: https://www.pa.gov/agencies/dli/programs-services/labor-management-relations/bureau-of-occupational-and-industrial-safety/uniform-construction-code-home</li>
+        <li>[C6] US Census CBP derived data (project dataset)</li>
+        <li>[C7] US EIA Pennsylvania electricity pricing references</li>
+        <li>[C8] Damodaran industry margin dataset (project benchmark reference)</li>
+        <li>[C9] PA DCED Incentive Programs: https://dced.pa.gov/programs/</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

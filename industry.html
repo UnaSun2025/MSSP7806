@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Industry Analysis | Pennsylvania</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1 id="industryTitle">Industry Analysis</h1>
+      <p>Industry snapshot is at the top of this page.</p>
+      <p><a href="./index.html" style="color:#d8fff2;">Back to homepage</a></p>
+    </section>
+
+    <section class="panel dynamic-panel" id="snapshotPanel" style="margin-top:14px;"></section>
+    <section class="panel" id="dataMethodPanel" style="margin-top:14px;">
+      <h3>Data &amp; Methodology</h3>
+      <p class="muted">Review definitions, formulas, inclusion/exclusion boundaries, and disclaimer language before using outputs for planning decisions.</p>
+      <p><a class="btn" href="./data-methodology.html">Open Data &amp; Methodology Page</a></p>
+      <ul class="cite-list">
+        <li>[C1] PA Revenue (CNIT), [C4] PA DEP permits, [C5] PA UCC</li>
+        <li>[C6] Census CBP project dataset, [C7] EIA electricity, [C8] margin benchmark, [C9] DCED programs</li>
+      </ul>
+    </section>
+
+    <section class="grid cols-main" style="margin-top:14px;">
+      <aside class="panel">
+        <h2>Project Inputs</h2>
+        <div class="form-row">
+          <label for="county">Target County</label>
+          <select id="county"></select>
+        </div>
+        <div class="form-row">
+          <label for="investment">Initial Investment (USD)</label>
+          <input id="investment" type="number" min="0" step="10000" value="5000000" />
+        </div>
+        <div class="form-row">
+          <label for="employees">Expected Employees</label>
+          <input id="employees" type="number" min="1" step="1" value="45" />
+        </div>
+        <div class="form-row">
+          <label for="wage">Average Annual Wage per Employee (USD)</label>
+          <input id="wage" type="number" min="0" step="1000" value="78000" />
+        </div>
+        <div class="form-row">
+          <label for="land">Land Use (acres)</label>
+          <input id="land" type="number" min="0" step="0.1" value="7.5" />
+        </div>
+        <div class="form-row">
+          <label for="capacity">Annual Capacity Index (units/year)</label>
+          <input id="capacity" type="number" min="0" step="10" value="800" />
+        </div>
+        <button class="btn" id="runBtn" style="width:100%;">Generate Analysis Outcome</button>
+        <button class="btn" id="exportCountyCsvBtn" style="width:100%;margin-top:8px;background:#0f766e;">Download County Key Metrics CSV</button>
+        <button class="btn" id="exportPolicyCsvBtn" style="width:100%;margin-top:8px;background:#b45309;">Download Policy Checklist (CSV)</button>
+      </aside>
+
+      <main style="display:grid;gap:14px;">
+        <section class="panel dynamic-panel" id="resultPanel"></section>
+        <section class="panel" id="wizardPanel">
+          <h3>Licensing &amp; Permitting Wizard</h3>
+          <p class="muted">Provide project details to generate a typical permitting pathway. Typical requirements vary by municipality; verify with local officials.</p>
+          <div class="grid cols-2">
+            <div>
+              <div class="form-row">
+                <label for="wizCounty">County (required)</label>
+                <select id="wizCounty" required></select>
+              </div>
+              <div class="form-row">
+                <label for="wizFacilityType">Facility Type</label>
+                <select id="wizFacilityType">
+                  <option value="new_build">New Build</option>
+                  <option value="retrofit">Retrofit</option>
+                  <option value="office_only">Office-Only</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="wizEmissionsWastewater">Emissions or Wastewater?</label>
+                <select id="wizEmissionsWastewater">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="wizSolidWaste">Solid Waste Handling?</label>
+                <select id="wizSolidWaste">
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="wizEmployees">Expected Employees</label>
+                <input id="wizEmployees" type="number" min="1" step="1" value="45" />
+              </div>
+              <button class="btn" id="runWizardBtn" type="button">Generate Wizard Checklist</button>
+            </div>
+            <div id="wizardSummary"></div>
+          </div>
+          <div id="wizardOutput" style="margin-top:10px;"></div>
+        </section>
+        <section class="panel dynamic-panel" id="policyExplainPanel"></section>
+        <section class="panel dynamic-panel" id="approvalPanel"></section>
+        <section class="panel dynamic-panel" id="contextPanel"></section>
+        <section class="panel dynamic-panel" id="driversPanel"></section>
+        <section class="panel dynamic-panel" id="interpretPanel"></section>
+        <section class="panel dynamic-panel" id="limitsPanel"></section>
+      </main>
+    </section>
+  </div>
+
+  <script src="./data.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="./industry.js"></script>
+</body>
+</html>

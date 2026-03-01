@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pennsylvania Business Environment</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <h1>Pennsylvania Business Environment Navigator</h1>
+      <p>
+        Use this government-style task navigator to move from planning to launch. Start with your current task,
+        follow the checklist, and use the "Start here" links to jump directly to the relevant sections.
+      </p>
+    </section>
+
+    <section class="panel" id="guidedStart" style="margin-top:14px;">
+      <h2>Not Sure Where To Start?</h2>
+      <p class="muted">Answer one question and we will route you to the best next task.</p>
+      <div class="guide-row">
+        <select id="startQuestion">
+          <option value="">Select your immediate need</option>
+          <option value="task-plan">I am evaluating whether the project is viable</option>
+          <option value="task-register">I need to form the business and set up tax accounts</option>
+          <option value="task-permits">I need permits, zoning, and environmental approvals</option>
+          <option value="task-hire-operate">I am preparing workforce and operating plans</option>
+          <option value="task-incentives">I need to identify incentives and funding support</option>
+        </select>
+        <button class="btn" id="routeBtn" type="button">Route Me</button>
+      </div>
+      <p id="routeHint" class="muted" style="margin-top:8px;"></p>
+    </section>
+
+    <section class="panel" id="taskNavigator" style="margin-top:14px;">
+      <h2>Primary Tasks</h2>
+      <p class="muted">Choose a task, complete the checklist, and proceed to the next action.</p>
+      <div class="task-grid">
+        <article class="task-card" id="task-plan">
+          <h3>1. Plan</h3>
+          <p class="task-desc">Define your project concept, market fit, and operating assumptions before committing capital.
+          Use early scenario testing to identify sensitivity to labor, energy, and scale.</p>
+          <ul class="task-checklist">
+            <li>Define product/service scope and target customers</li>
+            <li>Choose the most relevant industry profile</li>
+            <li>Set baseline assumptions for investment, labor, land, and capacity</li>
+            <li>Review county-level market context and concentration signals</li>
+            <li>Run a first-pass five-year scenario and compare alternatives</li>
+            <li>Document key risks and decision gates for go/no-go</li>
+          </ul>
+          <a class="btn" href="#section-industry-cards">Start here: Industry Profiles</a>
+        </article>
+
+        <article class="task-card" id="task-register">
+          <h3>2. Register</h3>
+          <p class="task-desc">Establish legal and tax identity so your project can transact, hire, and apply for programs.
+          Complete entity, tax, and account setup in the correct order.</p>
+          <ul class="task-checklist">
+            <li>Select legal entity structure and ownership format</li>
+            <li>Register through Pennsylvania Business One-Stop</li>
+            <li>Set up state tax accounts and payroll administration</li>
+            <li>Confirm local business licensing obligations</li>
+            <li>Set compliance calendar for recurring filings</li>
+            <li>Prepare baseline records for incentive applications</li>
+          </ul>
+          <a class="btn" href="#section-how-method">Start here: Method & Setup Guidance</a>
+        </article>
+
+        <article class="task-card" id="task-permits">
+          <h3>3. Permits &amp; Zoning</h3>
+          <p class="task-desc">Validate land-use compatibility and permitting requirements early to avoid schedule risk.
+          Coordinate local, DEP, and utility pathways before final design lock.</p>
+          <ul class="task-checklist">
+            <li>Shortlist counties and municipalities with suitable zoning</li>
+            <li>Confirm UCC and local land development requirements</li>
+            <li>Screen DEP triggers: air, water, stormwater, waste, and encroachment</li>
+            <li>Estimate approval timeline ranges and critical path milestones</li>
+            <li>Engage utility/interconnection contacts where needed</li>
+            <li>Track public engagement and community-risk factors</li>
+          </ul>
+          <a class="btn" href="#section-geography">Start here: Geography & Site Context</a>
+        </article>
+
+        <article class="task-card" id="task-hire-operate">
+          <h3>4. Hire &amp; Operate</h3>
+          <p class="task-desc">Build a workforce and operating model that can sustain compliance, quality, and productivity.
+          Plan staffing structure with realistic wage and training assumptions.</p>
+          <ul class="task-checklist">
+            <li>Define technical, semi-skilled, and management headcount mix</li>
+            <li>Set wage bands and hiring phasing by ramp period</li>
+            <li>Assess labor supply by county and commuting shed</li>
+            <li>Establish core SOP, safety, and quality controls</li>
+            <li>Validate operating cost profile against scenario outputs</li>
+            <li>Set KPI dashboard for labor, utilization, and margin</li>
+          </ul>
+          <a class="btn" href="#section-growth-scale">Start here: Scale & Growth Signals</a>
+        </article>
+
+        <article class="task-card" id="task-incentives">
+          <h3>5. Incentives &amp; Funding</h3>
+          <p class="task-desc">Align project design with available programs and financing pathways.
+          Treat incentives as conditional until eligibility and award terms are confirmed.</p>
+          <ul class="task-checklist">
+            <li>Screen KOZ/KIZ relevance by site geography</li>
+            <li>Assess fit for MTC, R&amp;D credit, and PA EDGE pathways</li>
+            <li>Estimate incentive impact using conservative scenarios</li>
+            <li>Document eligibility evidence and required submissions</li>
+            <li>Align application timing with permitting timeline</li>
+            <li>Define funding stack and contingency assumptions</li>
+          </ul>
+          <a class="btn" href="#section-policy-context">Start here: Policy & Incentive Context</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="grid cols-2" id="section-geography" style="margin-top:14px;">
+      <article class="panel">
+        <h2>Pillar Industries</h2>
+        <ul id="pillarList"></ul>
+      </article>
+      <article class="panel">
+        <h2>Government Incentive Stack</h2>
+        <ul id="incentiveList"></ul>
+      </article>
+      <article class="panel" style="grid-column: 1 / -1;">
+        <h2>Geographical Distribution</h2>
+        <ul id="geoList"></ul>
+      </article>
+    </section>
+
+    <section class="grid cols-2" id="section-how-method" style="margin-top:14px;">
+      <article class="panel">
+        <h3>How To Use This Tool</h3>
+        <ol id="howToList"></ol>
+      </article>
+      <article class="panel">
+        <h3>Method and Assumptions</h3>
+        <div id="methodText" class="narrative"></div>
+      </article>
+    </section>
+
+    <section class="panel" id="section-industry-cards" style="margin-top:14px;">
+      <h2>Five-Industry Profile Cards</h2>
+      <p class="muted">Each card includes market maturity, employment structure, regulatory intensity, site sensitivity, and data confidence.</p>
+      <div class="card-grid" id="industryCards"></div>
+    </section>
+
+    <section class="grid cols-2" id="section-growth-scale" style="margin-top:14px;">
+      <article class="panel">
+        <h3>Enterprise Scale (PA 2023, establishments)</h3>
+        <div id="enterpriseBars"></div>
+        <p class="caption"><strong>What:</strong> Relative enterprise counts by industry in Pennsylvania. <strong>How computed:</strong> Displayed from project reference establishment counts for 2023. <strong>Source:</strong> [C6] Census CBP-derived dataset in project.</p>
+      </article>
+      <article class="panel">
+        <h3>Approximate Growth Signal (2019-2023)</h3>
+        <div id="growthBars"></div>
+        <p class="caption"><strong>What:</strong> Directional 5-year growth signal by industry. <strong>How computed:</strong> Reference CAGR/signal values from 2019-2023 establishment trend in project dataset. <strong>Source:</strong> [C6] Census CBP-derived dataset in project.</p>
+      </article>
+    </section>
+
+    <section class="grid cols-2" id="section-policy-context" style="margin-top:14px;">
+      <article class="panel" style="grid-column: 1 / -1;">
+        <h3>Policy and Incentive Context</h3>
+        <div id="policyText" class="narrative"></div>
+      </article>
+    </section>
+
+    <section class="grid cols-2" id="section-data-method" style="margin-top:14px;">
+      <article class="panel" style="grid-column: 1 / -1;">
+        <h3>Data & Methodology</h3>
+        <p class="muted">Review variable definitions, formulas, inclusion/exclusion boundaries, and disclaimer language before relying on outputs for decision support.</p>
+        <p><a class="btn" href="./data-methodology.html">Open Data & Methodology Page</a></p>
+        <p class="caption"><strong>What:</strong> Documentation page for data dictionary and model logic. <strong>How computed:</strong> Static governance documentation maintained with this tool version. <strong>Source:</strong> [C1], [C4], [C6], [C7], [C8], [C9].</p>
+      </article>
+    </section>
+
+    <section class="grid cols-2" style="margin-top:14px;">
+      <article class="panel" style="grid-column: 1 / -1;">
+        <h3>Citation Placeholders</h3>
+        <ul class="cite-list">
+          <li>[C1] PA Department of Revenue - Corporate Net Income Tax</li>
+          <li>[C4] PA DEP - Business Permits and Services</li>
+          <li>[C6] US Census CBP (project-derived tables)</li>
+          <li>[C7] US EIA Pennsylvania electricity price references</li>
+          <li>[C8] Damodaran industry margin dataset (project reference)</li>
+          <li>[C9] PA DCED program pages (incentives/funding)</li>
+        </ul>
+      </article>
+    </section>
+  </div>
+
+  <script src="./data.js"></script>
+  <script src="./home.js"></script>
+</body>
+</html>
