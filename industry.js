@@ -11,6 +11,15 @@
   const d = allIndustries[key];
   const bench = data.industryBenchmarks[key];
 
+  const BASE_SCENARIO = {
+    investment: 5000000,
+    wage: 78000,
+    land: 7.5,
+    capacity: 800,
+    employees: 45,
+    countyKey: "allegheny"
+  };
+
   const fields = {
     county: document.getElementById("county"),
     investment: document.getElementById("investment"),
@@ -60,21 +69,29 @@
       .sort((a, b) => a[1].label.localeCompare(b[1].label))
       .map(([countyKey, c]) => `<option value="${countyKey}">${c.label}</option>`)
       .join("");
-    fields.county.innerHTML = options;
-    fields.county.value = "allegheny";
+    if (fields.county) {
+      fields.county.innerHTML = options;
+      fields.county.value = BASE_SCENARIO.countyKey;
+    }
     if (wizardFields.county) {
       wizardFields.county.innerHTML = options;
-      wizardFields.county.value = fields.county.value;
+      wizardFields.county.value = BASE_SCENARIO.countyKey;
     }
   }
 
   function getWizardInput() {
+    const countyKey = wizardFields.county
+      ? wizardFields.county.value
+      : (fields.county ? fields.county.value : BASE_SCENARIO.countyKey);
+    const employeesVal = wizardFields.employees
+      ? wizardFields.employees.value
+      : (fields.employees ? fields.employees.value : BASE_SCENARIO.employees);
     return {
-      countyKey: wizardFields.county ? wizardFields.county.value : fields.county.value,
+      countyKey,
       facilityType: wizardFields.facilityType ? wizardFields.facilityType.value : "new_build",
       emissionsWastewater: wizardFields.emissionsWastewater ? wizardFields.emissionsWastewater.value : "no",
       solidWaste: wizardFields.solidWaste ? wizardFields.solidWaste.value : "no",
-      employees: Math.max(1, safeNum(wizardFields.employees ? wizardFields.employees.value : fields.employees.value, 1))
+      employees: Math.max(1, safeNum(employeesVal, BASE_SCENARIO.employees))
     };
   }
 
@@ -253,13 +270,19 @@
   }
 
   function getInput() {
+    const countyVal = wizardFields.county
+      ? wizardFields.county.value
+      : (fields.county ? fields.county.value : BASE_SCENARIO.countyKey);
+    const employeesVal = wizardFields.employees
+      ? safeNum(wizardFields.employees.value, BASE_SCENARIO.employees)
+      : (fields.employees ? safeNum(fields.employees.value, BASE_SCENARIO.employees) : BASE_SCENARIO.employees);
     return {
-      countyKey: fields.county.value,
-      investment: safeNum(fields.investment.value, 0),
-      employees: Math.max(1, safeNum(fields.employees.value, 1)),
-      wage: safeNum(fields.wage.value, 0),
-      land: safeNum(fields.land.value, 0),
-      capacity: safeNum(fields.capacity.value, 0)
+      countyKey: countyVal || BASE_SCENARIO.countyKey,
+      investment: fields.investment ? safeNum(fields.investment.value, BASE_SCENARIO.investment) : BASE_SCENARIO.investment,
+      employees: Math.max(1, employeesVal),
+      wage: fields.wage ? safeNum(fields.wage.value, BASE_SCENARIO.wage) : BASE_SCENARIO.wage,
+      land: fields.land ? safeNum(fields.land.value, BASE_SCENARIO.land) : BASE_SCENARIO.land,
+      capacity: fields.capacity ? safeNum(fields.capacity.value, BASE_SCENARIO.capacity) : BASE_SCENARIO.capacity
     };
   }
 
@@ -709,15 +732,9 @@
   safeRenderAnalysis();
   safeRenderWizard();
 
-  document.getElementById("runBtn").addEventListener("click", safeRenderAnalysis);
-  document.getElementById("county").addEventListener("change", () => {
-    if (wizardFields.county) wizardFields.county.value = fields.county.value;
-    safeRenderAnalysis();
-    safeRenderWizard();
-  });
   if (wizardFields.county) {
     wizardFields.county.addEventListener("change", () => {
-      fields.county.value = wizardFields.county.value;
+      if (fields.county) fields.county.value = wizardFields.county.value;
       safeRenderAnalysis();
       safeRenderWizard();
     });
